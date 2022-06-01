@@ -21,7 +21,7 @@ class SlotsTableSeeder extends Seeder
     {
 
         $slot = new Slot;
-        $slot-> day = Carbon::createFromFormat("Y.m.d", "2021.04.10", "Europe/Vienna");
+        $slot-> day = Carbon::createFromFormat("Y.m.d", "2021.04.10", "Europe/Vienna");//->format('d.m.Y');
         $slot-> from = Carbon::createFromTime(13, 00, 00, "Europe/Vienna");
         $slot-> to = Carbon::createFromTime(17, 00, 00, "Europe/Vienna");
 

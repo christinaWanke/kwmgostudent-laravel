@@ -11,7 +11,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class Course extends Model
 {
     use HasFactory;
-    protected $fillable = ['title', 'description', 'semester', 'professor', 'comment', 'user_id'];
+    protected $fillable = ['cnum', 'title', 'description', 'semester', 'professor', 'comment', 'user_id'];
 
     public function images() : HasMany{
         return $this->hasMany(Image::class);
@@ -21,7 +21,11 @@ class Course extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function slot() : HasMany{
+    public function slots() : HasMany{
         return $this->hasMany(Slot::class);
+    }
+
+    public function comments(): HasMany{
+        return $this->hasMany(Comment::class);
     }
 }

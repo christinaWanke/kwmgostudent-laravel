@@ -64,4 +64,23 @@ class UserController extends Controller
             return response()->json("updating User failed: " . $e->getMessage(), 420);
         }
     }
+
+    /*public function isTutor(string $persnum): JsonResponse{
+        $user = User::where('persnum', $persnum)->first();
+        return response()->json(boolval($user->isTutor));
+    }*/
+
+    /*public function isTutor(string $persnum): JsonResponse{
+        $user = User::where('persnum', $persnum)->first();
+        return $user != null ?
+            response()->json(true, 200) :
+            response()->json(false, 200);
+    }*/
+
+    public function isTutor(string $id): JsonResponse{
+        $user = User::where('id', $id)->first();
+        return response()->json(boolval($user->isTutor));
+    }
+
+
 }

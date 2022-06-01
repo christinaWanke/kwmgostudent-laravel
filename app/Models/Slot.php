@@ -22,7 +22,7 @@ class Slot extends Model
         return $this->belongsToMany(User::class)->withTimestamps();
     }
 
-    public function slotBooked() : HasMany {
+    /*public function slotBooked() : HasMany {
         return $this->hasMany(SlotUser::class);
-    }
+    }*/
 }

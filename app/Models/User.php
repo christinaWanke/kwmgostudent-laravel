@@ -8,8 +8,9 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Tymon\JWTAuth\Contracts\JWTSubject;
 
-class User extends Authenticatable
+class User extends Authenticatable implements JWTSubject
 {
     use HasFactory, Notifiable;
 
@@ -48,7 +49,30 @@ class User extends Authenticatable
         return $this->hasMany(Course::class);
     }
 
-    public function slotBooked() : HasMany {
+    public function comments():HasMany{
+        return $this->hasMany(Comment::class);
+    }
+
+    /*public function slotBooked() : HasMany {
         return $this->hasMany(SlotUser::class);
+    }*/
+    public function getJWTIdentifier()
+    {
+        return $this->getKey();
+    }
+
+    public function getJWTCustomClaims()
+    {
+        return ['user' => [
+            'id' => $this->id,
+            'persnum' => $this->persnum,
+            'firstName' => $this->firstName,
+            'lastName' => $this->lastName,
+            'email' => $this->email,
+            'description' => $this->description,
+            'isTutor' => $this->isTutor,
+            'semester' => $this->semester
+            ]
+        ];
     }
 }
